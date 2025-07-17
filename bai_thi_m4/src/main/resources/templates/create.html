@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: header">
+    <title>Create</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h3 class="bg-success text-white p-3 mb-4 rounded">Thêm mới</h3>
+    <p>
+        <a th:href="@{/giao_dich}" class="btn btn-outline-success">Quay lại</a>
+    </p>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form th:action="@{/giao_dich/save}" th:object="${giaoDichs}" method="post" novalidate="novalidate">
+                <input type="hidden" th:field="*{id}">
+                <div class="mb-3">
+                    <label for="maGiaoDich" class="form-label">Mã giao dịch</label>
+                    <input type="text" id="maGiaoDich" th:field="*{maGiaoDich}" class="form-control" placeholder="Nhập mã">
+                </div>
+                <div class="mb-3">
+                    <label for="ngayGiaoDich" class="form-label">Ngày giao dịch</label>
+                    <input type="date" id="ngayGiaoDich" th:field="*{ngayGiaoDich}" class="form-control" placeholder="Nhập ngày">
+                </div>
+                <div class="mb-3">
+                    <label for="idKhachHang" class="form-label">Tên khách hàng</label>
+                    <select th:field="*{idKhachHang}" id="idKhachHang" class="form-select">
+                        <option value="" disabled selected>--Chọn khách hàng--</option>
+                        <option th:each="khach: ${khachHang}" th:value="${khach.id}" th:text="${khach.tenKhachHang}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="idDichVu" class="form-label">Loại dịch vụ</label>
+                    <select th:field="*{idDichVu}" id="idDichVu" class="form-select">
+                        <option value="" disabled selected>--chọn dịch vụ--</option>
+                        <option th:each="dv: ${dichVu}" th:value="${dv.id}" th:text="${dv.tenDichVu}"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="gia" class="form-label">Nhập giá</label>
+                    <input type="number" id="gia" th:field="*{gia}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="dienTich" class="form-label">Nhập diện tích</label>
+                    <input type="number" id="dienTich" th:field="*{dienTich}" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success w-100">Lưu</button>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
